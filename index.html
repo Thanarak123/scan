@@ -374,16 +374,12 @@
 
         async function startVideo() {
             const video = document.getElementById('video');
-            //ปิดก้่อน video.addEventListener('play', onVideoPlay);
+            video.addEventListener('play', onVideoPlay);
             
             const videoLoadingText = document.getElementById('video-loading-text');
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 video.srcObject = stream;
-                video.onloadeddata = () => {
-                onVideoPlay(); 
-                video.onloadeddata = null; // ป้องกันการเรียกซ้ำ
-        };
             } catch (err) {
                 console.error('CRITICAL ERROR starting video stream:', err.name, err.message);
                 videoLoadingText.innerText = 'ไม่สามารถเปิดกล้องได้! กรุณาอนุญาตให้เว็บเข้าถึงกล้อง';
